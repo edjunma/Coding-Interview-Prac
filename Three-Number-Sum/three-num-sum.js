@@ -20,4 +20,5 @@ function threeNumberSum(array, targetSum) {
             }
         }
     }
+    return triplets;
 }
