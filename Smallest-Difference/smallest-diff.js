@@ -9,4 +9,22 @@ function smallestDifference(arrayOne, arrayTwo) {
     let smallest = Infinity;
     let current = Infinity;
     let smallestPair = [];
+    while (idxOne < arrayOne.length && idxTwo < arrayTwo.length) {
+        let firstNum = arrayOne[idxOne];
+        let secondNum = arrayTwo[idxTwo];
+        if (firstNum <  secondNum) {
+            current = secondNum - firstNum;
+            idxOne++;
+        } else if (secondNum < firstNum) {
+            current = firstNum - secondNum;
+            idxTwo++;
+        } else {
+            return [firstNum, secondNum];
+        }
+        if (smallest > current) {
+            smallest = current;
+            smallestPair = [firstNum, secondNum];
+        }
+    }
+    return smallestPair;
 }
