@@ -29,3 +29,24 @@ insert (value) {
     }
     return this;
 }
+
+// Average: O(log(n)) time | O(log(n)) space
+// Worst: O(n) time | O(n) space
+
+contains(value) {
+    if (value < this.value) {
+        if (this.left === null) {
+            return false;
+        } else {
+            return this.left.contains(value);
+        }
+    } else if (value > this.value) {
+        if (this.right === null) {
+            return false;
+        } else {
+            return this.right.contains(value);
+        }
+    } else {
+        return true;
+    }
+}
