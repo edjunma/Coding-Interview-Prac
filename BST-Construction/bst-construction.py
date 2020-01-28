@@ -2,7 +2,8 @@
 # Binary Search Tree Construction
 # BST class
 
-class BST: 
+
+class BST:
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -34,7 +35,7 @@ class BST:
         elif value > self.value:
             if self.right is None:
                 return False
-            else: 
+            else:
                 return self.right.contains(value)
             else:
                 return True
@@ -69,6 +70,7 @@ class BST:
             parent.right = self.left if self.left is not None else self.right
     return self
 
+
 def getMinValue(self):
     if self.left is None:
         return self.value
@@ -77,7 +79,8 @@ def getMinValue(self):
 
 # Solution 2 in Python
 
-class BST: 
+
+class BST:
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -101,3 +104,24 @@ class BST:
                 else:
                     currentNode = currentNode.right
         return self
+
+    # Average: O(log(n)) time | O(1) space
+    # Worst: O(n) time | O(1) space
+
+    def contains(self, value):
+        currentNode = self
+        while currentNode is not None:
+            if value < currentNode.value:
+                currentNode = currentNode.left
+            elif value > currentNode.value:
+                currentNode = currentNode.right
+            else:
+                return True
+        return False
+
+    # Average: O(log(n)) time | O(1) space
+    # Worst: O(n) time | O(1) space
+
+    def remove(self, value, parentNode=None):
+        currentNode = self
+        while currentNode is not None:
