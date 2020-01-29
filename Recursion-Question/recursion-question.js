@@ -5,9 +5,16 @@ const NUM_CAN_PICK = [1, 2, 4];
 const coinGame = (numCoins, players) => {
 	const currentPlayer = players[0];
 	const possibilities = [];
+	if (numCoins <= 0) return [];
 	NUM_CAN_PICK.forEach(numCoinsToPick => {
+		// current player has taken away numCoinsToPick coins
 		if (numCoins === numCoinsToPick) {
 			possibilities.push([[numCoins, currentPlayer]]);
+		} else if (numCoins > numCoinsToPick) {
+			const innerPossibilities = coinGame(numCoins - numCoinsToPick, [...players].reverse());
+			innerPossibilities.forEach(innerPossibility => {
+				possibilities.push([[numCoinsToPick, currentPlayer, ...innerPossibilities]]);
+			});
 		}
 	});
 	return possibilities;
