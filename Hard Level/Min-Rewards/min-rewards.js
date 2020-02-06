@@ -16,6 +16,7 @@ function minRewards(scores) {
 	return rewards.reduce((a, b) => a + b);
 }
 
+// Solution #2
 // O(n) time | O(n) space - where in is the length of the input array
 
 function minRewards(scores) {
@@ -50,4 +51,18 @@ function expandFromLocalMinIdx(localMinIdx, scores, rewards) {
 		rewards[rightIdx] = rewards[rightIdx - 1] + 1;
 		rightIdx++;
 	}
+}
+
+// JavaScript Solution #3
+// O(n) time | O(n) space - where n is the length of the input array
+
+function minRewards(scores) {
+	const rewards = scores.map(_ => 1);
+	for (let i = 1; i < scores.length; i++) {
+		if (scores[i] > scores[i - 1]) rewards[i] = rewards[i - 1] + 1;
+	}
+	for (let i = scores.length - 2; i >= 0; i--) {
+		if (scores[i] > scores[i + 1]) rewards[i] = Math.max(rewards[i], rewards[i + 1] + 1);
+	}
+	return rewards.reduce((a, b) => a + b);
 }
