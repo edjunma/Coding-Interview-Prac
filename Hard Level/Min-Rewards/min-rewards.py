@@ -40,3 +40,28 @@ def getLocalMinIdxs(array):
         if array[i] < array[i + 1] and array[i] < array[i - 1]:
             localMinIdxs.append(i)
     return localMinIdxs
+
+
+def expandFromLocalMinIdx(localMinIdx, scores, rewards):
+    leftIdx = localMinIdx - 1
+    while leftIdx >= 0 and scores[leftIdx] > scores[leftIdx + 1]:
+        rewards[leftIdx] = max(rewards[leftIdx], rewards[leftIdx + 1] + 1)
+        left -= 1
+    rightIdx = localMinIdx + 1
+    while rightIdx < len(scores) and scores[rightIdx] > scores[rightIdx - 1]:
+        rewards[rightIdx] = rewards[rightIdx - 1] + 1
+        rightIdx += 1
+
+# Python Solution #3
+# O(n) time | O(n) space - where n is the length of the input array
+
+
+def minRewards(scores):
+    rewards = [1 for _ in scores]
+    for i in range(1, len(scores)):
+        if scores[i] > scores[i - 1]:
+            rewards[i] = rewards[i - 1] + 1
+    for i in reversed((range(len(scores) - 1))):
+        if scores[i] > scores[i + 1]:
+            rewards[i] = max(rewards[i], rewards[i + 1] + 1)
+    return sum(rewards)
