@@ -35,3 +35,29 @@ function getNthFib(n) {
 	}
 	return n > 1 ? lastTwo[1] : lastTwo[0];
 }
+
+// Leet Code solutions
+// Iterative solution
+// O(n) time | O(1) space
+
+const fib = N => {
+	let arr = [0, 1];
+
+	for (let i = 2; i <= N; i++) {
+		arr.push(arr[i - 2] + arr[i - 1]);
+	}
+
+	return arr[N];
+};
+
+// Dynamic Programming iterative solution with memoization from bottom-up
+// O(n) time | O(1) space
+
+const fib = N => {
+	const memo = {};
+	for (let i = 0; i <= N; i++) {
+		if (i < 2) memo[i] = i;
+		else memo[i] = memo[i - 2] + memo[i - 1];
+	}
+	return memo[N];
+};
