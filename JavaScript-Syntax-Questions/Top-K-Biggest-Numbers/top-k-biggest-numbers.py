@@ -51,3 +51,6 @@ def findTopK(arr, k):
 
 
 print findTopK([2, 1, 4, 7, 3], 3)
+
+# Improvements: Brainstorm other edge cases/test cases
+# Multiple for loops, maybe can reduce
