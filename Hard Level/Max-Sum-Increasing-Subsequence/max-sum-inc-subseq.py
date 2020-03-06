@@ -15,4 +15,6 @@ def maxSumIncreasingSubsequence(array):
                 sequences[i] = j
         if sums[i] >= sums[maxSumIdx]:
             maxSumIdx = i
-return [sums[maxSumIdx], buildSequence(array, se)]
+return [sums[maxSumIdx], buildSequence(array, sequences, maxSumIdx)]
+
+def buildSequence(array, sequences, currentIdx):
