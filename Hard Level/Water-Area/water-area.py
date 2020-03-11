@@ -11,3 +11,11 @@ def waterArea(heights):
         leftMax = max(leftMax, height)
     rightMax = 0
     for i in reversed(range(len(heights))):
+      height = heights[i]
+      minHeight = min(rightMax, maxes[i])
+      if height < minHeight:
+        maxes[i] = minHeight - height
+      else:
+        maxes[i] = 0
+      rightMax = max(rightMax, height)
+    return sum(maxes)
