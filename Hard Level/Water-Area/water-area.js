@@ -10,4 +10,15 @@ function waterArea(heights) {
 		leftMax = Math.max(leftMax, height);
 	}
 	let rightMax = 0;
+	for (let i = heights.length - 1; i >= 0; i--) {
+		const height = heights[i];
+		const minHeight = Math.min(rightMax, maxes[i]);
+		if (height < minHeight) {
+			maxes[i] = minHeight - height;
+		} else {
+			maxes[i] = 0;
+		}
+		rightMax = Math.max(rightMax, height);
+	}
+	return maxes.reduce((a, b) => a + b, 0);
 }
