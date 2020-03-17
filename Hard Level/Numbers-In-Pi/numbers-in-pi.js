@@ -6,7 +6,7 @@ function numbersInPi(pi, numbers) {
 	for (const number of numbers) {
 		numbersTable[number] = true;
 	}
-	const minSpaces = getMinSapces(pi, numbersTable, {}, 0);
+	const minSpaces = getMinSpaces(pi, numbersTable, {}, 0);
 	return minSpaces === Infinity ? -1 : minSpaces;
 }
 
@@ -24,3 +24,20 @@ function getMinSpaces(pi, numbersTable, cache, idx) {
 	cache[idx] = minSpaces;
 	return cache[idx];
 }
+
+// JavaScript Solution #2
+// O(n^3 + m) time | O(n + m) space - where n is the number of digits in Pi and m is the number of favorite number
+
+function numbersInPi(pi, numbers) {
+  const numbersTable = {};
+  for (const number of numbers) {
+    numbersTable[number] = true;
+  }
+  const cache = {};
+  for (let i = pi.length - 1; i >= 0; i--) {
+    getMinSpaces(pi, numbersTable, cache, i);
+  }
+  return cache[0] === Infinity ? -1 : cache[0];
+}
+
+function getMinSpaces
