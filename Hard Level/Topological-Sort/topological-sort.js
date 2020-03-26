@@ -61,5 +61,10 @@ class JobGraph {
 }
 
 class JobNode {
-	
+	constructor(job) {
+		this.job = job;
+		this.prereqs = [];
+		this.visited = false;
+		this.visiting = false;
+	}
 }
