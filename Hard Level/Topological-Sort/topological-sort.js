@@ -68,3 +68,28 @@ class JobNode {
 		this.visiting = false;
 	}
 }
+
+// JavaScript Solution #2
+// O(j + d) time | O(j + d) space
+
+function topologicalSort(jobs, deps) {
+	const jobGraph = createJobGraph(jobs, deps);
+	return getOrderedJobs(jobGraph);
+}
+
+function createJobGraph(jobs, deps) {
+	const graph = new JobGraph(jobs);
+	for (const [job, dep] of deps) {
+		graph.addDep(job, dep);
+	}
+	return graph;
+}
+
+function getOrderedJobs(graph) {
+	const orderedJobs = [];
+	const nodesWithNoPrereqs = graph.nodes.filter(node => !node.numOfPrereqs);
+	while (nodesWithNoPrereqs.length) {
+		const node = nodesWithNoPrereqs.pop();
+		orderedJobs.push(node.job);
+	}
+}
