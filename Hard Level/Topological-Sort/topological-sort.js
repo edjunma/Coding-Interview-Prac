@@ -91,5 +91,26 @@ function getOrderedJobs(graph) {
 	while (nodesWithNoPrereqs.length) {
 		const node = nodesWithNoPrereqs.pop();
 		orderedJobs.push(node.job);
+		removeDeps(node, nodesWithNoPrereqs);
+	}
+	const graphHasEdges = graph.nodes.some(node => node.numOfPrereqs);
+	return graphHasEdges ? [] : orderedJobs;
+}
+
+function removeDeps(node, nodesWithNoPrereqs) {
+	while (node.deps.length) {
+		const dep = node.deps.pop();
+		dep.numOfPrereqs--;
+		if (!dep.numOfPrereqs) nodesWithNoPrereqs.push(dep);
+	}
+}
+
+class JobGraph {
+	constructor(jobs) {
+		this.nodes = [];
+		this.graph = {};
+		for (const job of jobs) {
+			this.addNode(job);
+		}
 	}
 }
