@@ -69,3 +69,32 @@ class JobNode:
         self.prereqs = []
         self.visited = False
         self.visiting = False
+
+# Python Solution #2
+# O(j + d) time | O(j + d) space
+
+def topologicalSort(jobs, deps):
+    JobGraph = createJobGraph(jobs, deps)
+    return getOrderedJobs(JobGraph)
+
+def createJobGraph(jobs, deps):
+    graph = JobGraph(jobs)
+    for job, dep in deps:
+        graph.addDep(job, dep)
+    return graph
+
+def getOrderedJobs(graph):
+    ordereredJobs = []
+    nodesWithNoPrereqs = list(filter(lambda node: node.numOfPrereqs == 0, graph.nodes))
+    while len(nodesWithNoPrereqs):
+        node = nodesWithNoPrereqs.pop()
+        ordereredJobs.append(node.job)
+        removeDeps(node, nodesWithNoPrereqs)
+    graphHasEdges = any(node.numOfPrereqs for node in graph.nodes)
+    return [] if graphHasEdges else ordereredJobs
+
+def removeDeps(node, nodesWithNoPrereqs):
+    while len(node.deps):
+        dep = node.deps.pop()
+        dep.numOfPrereqs -= 1
+        if dep.
