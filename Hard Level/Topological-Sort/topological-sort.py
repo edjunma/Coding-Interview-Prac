@@ -97,4 +97,34 @@ def removeDeps(node, nodesWithNoPrereqs):
     while len(node.deps):
         dep = node.deps.pop()
         dep.numOfPrereqs -= 1
-        if dep.
+        if dep.numOfPrereqs == 0:
+            nodesWithNoPrereqs.append(dep)
+
+class JobGraph:
+    def __init__(self, jobs):
+        self.nodes = []
+        self.graph = {}
+        for job in jobs:
+            self.addNode(job)
+
+    def addDep(self, job, dep):
+        jobNode = self.getNode(job)
+        depNode = self.getNode(dep)
+        jobNode.deps.append(depNode)
+        depNode.numOfPrereqs += 1
+
+    def addNode(self, job):
+        self.graph[job] = JobNode(job)
+        self.nodes.append(self.graph[job])
+
+    def getNode(self, job):
+        if job not in self.graph:
+            self.addNode(job)
+        return self.graph[job]
+
+class JobNode:
+    def __init__(self, job):
+        self.job = job
+        self.deps = []
+        self.numOfPrereqs = 0
+        
