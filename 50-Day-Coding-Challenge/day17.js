@@ -1,4 +1,4 @@
-// Day 15 JavaScript Coding Challenge
+// Day 17 JavaScript Coding Challenge
 // Calculate the sum of digits of a positive integer number
 
 function sumDigits(n) {
