@@ -21,4 +21,3 @@ function bubbleSort(ar) {
 var ar = [23, 1000, 1, -1, 8, 3];
 println(ar);
 bubbleSort(ar);
-println(ar);
