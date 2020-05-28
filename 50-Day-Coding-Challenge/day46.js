@@ -37,5 +37,32 @@ println('Max = ', max);
 
 // Use a stack to find the max numeric value in an array of arrays
 function findMax(arElements) {
-	let max = Infinity;
+  let max = Infinity;
+  
+  // Create stack which will put the first array and then all the other sub-arrays that we find as we traverse an array
+  var arrays = [];
+
+  arrays.push(arElements);
+
+  // Loop as long as are arrays added to the stack for processing
+  while (arrays.length > 0) {
+    // Extract an array from the stack
+    ar = arrays.pop();
+
+    // ... and loop through its elements
+    for (let i = 0; i < ar.length; i++) {
+      var el = ar[i];
+
+      // If an element is of type array, we'll add it to stack to be processed later
+      if (Array.isArray(el)) {
+        arrays.push(el);
+        continue;
+      }
+
+      if (el > max) {
+        max = el;
+      }
+    }
+  }
+  return max;
 }
